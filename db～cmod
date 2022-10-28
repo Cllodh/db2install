@@ -1,12 +1,32 @@
+0.yum install libnsl 
+----------------------------------------------------------------------
+1.建立賬號
+sudo useradd -u 38322 dasacc 
+sudo useradd -u 38927 -g wasiadm1 -m -d /home/wasinst1 wasinst1
+sudo useradd -u 38327 -g db2iadm1 -m -d /home/dasinst1 dasinst1
+sudo useradd -u 38324 -g db2iadm1 -m -d /home/db2inst1 db2inst1 
+sudo useradd -u 38323 -g db2fadm1 -m -d /home/db2fenc1 db2fenc1
+----------------------------------------------------------------------
+2.建立群組
+sudo groupadd --gid 38325 db2iadm1
+sudo groupadd --gid 38326 db2fadm1
+sudo groupadd --gid 38328 wasiadm1
+----------------------------------------------------------------------
+
+3.vi /etc/group   把賬號加入最後 
+db2iadm1:x:38325:db2inst1,dasinst1
+db2fadm1:x:38326:db2fenc1
+wasiadm1:x:38328:wasinst1
+
 [root@localhost universal]# ./db2_install
 Requirement not matched for DB2 database "Server" . Version: "10.5.0.11".
 
 Summary of prerequisites that are not met on the current system:
 
-   DBT3514W  The db2prereqcheck utility failed to find the following 32-bit libr    ary file: "/lib/libpam.so*".
+   DBT3514W  The db2prereqcheck utility failed to find the following 32-bit library file: "/lib/libpam.so*".
 
 
-DBT3514W  The db2prereqcheck utility failed to find the following 32-bit library     file: "libstdc++.so.6".
+DBT3514W  The db2prereqcheck utility failed to find the following 32-bit library file: "libstdc++.so.6".
 
 
 DBI1324W  Support of the db2_install command is deprecated.
@@ -16,6 +36,10 @@ DBI1324W  Support of the db2_install command is deprecated.
 Default directory for installation of products - /opt/ibm/db2/V10.5
 
 ***********************************************************
+Install into default directory (/opt/ibm/db2/V10.5) ? [yes/no]
+y
+Install into default directory (/opt/ibm/db2/V10.5) ? [yes/no]
+y
 Install into default directory (/opt/ibm/db2/V10.5) ? [yes/no]
 yes
 
@@ -41,10 +65,10 @@ Requirement not matched for DB2 database "Server" . Version: "10.5.0.11".
 
 Summary of prerequisites that are not met on the current system:
 
-   DBT3514W  The db2prereqcheck utility failed to find the following 32-bit libr    ary file: "/lib/libpam.so*".
+   DBT3514W  The db2prereqcheck utility failed to find the following 32-bit library file: "/lib/libpam.so*".
 
 
-DBT3514W  The db2prereqcheck utility failed to find the following 32-bit library     file: "libstdc++.so.6".
+DBT3514W  The db2prereqcheck utility failed to find the following 32-bit library file: "libstdc++.so.6".
 
 
 DB2 installation is being initialized.
@@ -253,7 +277,7 @@ Estimated time 180 second(s)
 Task #40 end
 
 Task #41 start
-Description: Installing or updating DB2 HA scripts for IBM Tivoli System Automat    ion for Multiplatforms (Tivoli SA MP)
+Description: Installing or updating DB2 HA scripts for IBM Tivoli System Automation for Multiplatforms (Tivoli SA MP)
 Estimated time 40 second(s)
 Task #41 end
 
@@ -305,140 +329,107 @@ Task #50 end
 The execution completed successfully.
 
 For more information see the DB2 installation log at
-"/tmp/db2_install.log.30743".
-[root@localhost universal]# vi /tmp/db2_install.log.30743
+"/tmp/db2_install.log.3478".
+[root@localhost universal]# vi /tmp/db2_install.log.3478
 [root@localhost universal]# /opt/ibm/db2/V10.5/cfg/db2ln
-[root@localhost universal]# cd /usr/lib/
-[root@localhost lib]# ls -lat
-total 60
-dr-xr-xr-x.  34 root root  4096 Oct 21 22:02 .
-lrwxrwxrwx.   1 root root    39 Oct 21 22:02 libdb2e.so.1.0 -> /opt/ibm/db2/V10.    5/lib32/libdb2e.so.1.0
-lrwxrwxrwx.   1 root root    37 Oct 21 22:02 libdb2e.so.1 -> /opt/ibm/db2/V10.5/    lib32/libdb2e.so.1
-lrwxrwxrwx.   1 root root    35 Oct 21 22:02 libdb2e.so -> /opt/ibm/db2/V10.5/li    b32/libdb2e.so
-lrwxrwxrwx.   1 root root    38 Oct 21 22:02 libdb2.so.1.0 -> /opt/ibm/db2/V10.5    /lib32/libdb2.so.1.0
-lrwxrwxrwx.   1 root root    36 Oct 21 22:02 libdb2.so.1 -> /opt/ibm/db2/V10.5/l    ib32/libdb2.so.1
-lrwxrwxrwx.   1 root root    34 Oct 21 22:02 libdb2.so -> /opt/ibm/db2/V10.5/lib    32/libdb2.so
-drwxr-xr-x.  38 root root  4096 Oct 21 21:01 locale
-drwxr-xr-x.   5 root root  4096 Oct 21 20:58 rpm
-drwxr-xr-x.  91 root root 16384 Oct 21 20:32 firmware
-drwxr-xr-x.   4 root root   268 Oct 21 20:32 udev
-drwxr-xr-x.   2 root root  4096 Oct 21 20:32 tmpfiles.d
-drwxr-xr-x.   2 root root    59 Oct 21 20:32 modules-load.d
-drwxr-xr-x.  16 root root  4096 Oct 21 20:32 tuned
-drwxr-xr-x.   8 root root    97 Oct 21 20:32 firewalld
-drwxr-xr-x.  13 root root   158 Oct 21 20:32 ..
-drwxr-xr-x.   2 root root    74 Oct 21 20:32 realmd
-drwxr-xr-x.   2 root root    79 Oct 21 20:31 kdump
-drwxr-xr-x.   2 root root    26 Oct 21 20:30 mdadm
-drwxr-xr-x.  16 root root  4096 Oct 21 20:30 systemd
-drwxr-xr-x.   4 root root    72 Oct 21 20:29 modules
-drwxr-xr-x.   3 root root    19 Oct 21 20:29 fontconfig
-drwxr-xr-x.   2 root root    50 Oct 21 20:29 polkit-1
-drwxr-xr-x.   2 root root    53 Oct 21 20:29 modprobe.d
-drwxr-xr-x.   2 root root    61 Oct 21 20:29 sysusers.d
-drwxr-xr-x.   2 root root   145 Oct 21 20:29 sysctl.d
-drwxr-xr-x.   2 root root    33 Oct 21 20:29 environment.d
-drwxr-xr-x.   4 root root   236 Oct 21 20:29 dracut
-drwxr-xr-x.   6 root root    76 Oct 21 20:28 kbd
-drwxr-xr-x.   3 root root    21 Oct 21 20:28 grub
-drwxr-xr-x.   4 root root    76 Oct 21 20:28 debug
-drwxr-xr-x.   3 root root    24 Oct 21 20:28 swidtag
+[root@localhost universal]# ls -lat /usr/lib
+total 68
+dr-xr-xr-x.  38 root root  4096 Oct 28 10:34 .
+lrwxrwxrwx.   1 root root    39 Oct 28 10:34 libdb2e.so.1.0 -> /opt/ibm/db2/V10.5/lib32/libdb2e.so.1.0
+lrwxrwxrwx.   1 root root    37 Oct 28 10:34 libdb2e.so.1 -> /opt/ibm/db2/V10.5/lib32/libdb2e.so.1
+lrwxrwxrwx.   1 root root    35 Oct 28 10:34 libdb2e.so -> /opt/ibm/db2/V10.5/lib32/libdb2e.so
+lrwxrwxrwx.   1 root root    38 Oct 28 10:34 libdb2.so.1.0 -> /opt/ibm/db2/V10.5/lib32/libdb2.so.1.0
+lrwxrwxrwx.   1 root root    36 Oct 28 10:34 libdb2.so.1 -> /opt/ibm/db2/V10.5/lib32/libdb2.so.1
+lrwxrwxrwx.   1 root root    34 Oct 28 10:34 libdb2.so -> /opt/ibm/db2/V10.5/lib32/libdb2.so
+drwxr-xr-x.  39 root root  4096 Oct 27 10:28 locale
+drwxr-xr-x.  91 root root 16384 Oct 27 10:28 firmware
+drwxr-xr-x.   4 root root  4096 Oct 27 10:26 udev
+drwxr-xr-x.   2 root root  4096 Oct 27 10:26 tmpfiles.d
+drwxr-xr-x.  16 root root  4096 Oct 27 10:25 tuned
+drwxr-xr-x.   8 root root    97 Oct 27 10:25 firewalld
+drwxr-xr-x.  13 root root   158 Oct 27 10:25 ..
+drwxr-xr-x.   2 root root    74 Oct 27 10:25 realmd
+drwxr-xr-x.   2 root root   107 Oct 27 10:25 modules-load.d
+drwxr-xr-x.   9 root root   109 Oct 27 10:25 cups
+drwxr-xr-x.   2 root root   101 Oct 27 10:24 sysusers.d
+drwxr-xr-x.   2 root root   208 Oct 27 10:22 sysctl.d
+drwxr-xr-x.   2 root root    79 Oct 27 10:22 kdump
+drwxr-xr-x.  16 root root  4096 Oct 27 10:22 systemd
+drwxr-xr-x.   2 root root    26 Oct 27 10:22 mdadm
+drwxr-xr-x.   3 root root    18 Oct 27 10:21 alsa
+drwxr-xr-x.   5 root root  4096 Oct 27 10:21 rpm
+drwxr-xr-x.   4 root root    72 Oct 27 10:16 modules
+drwxr-xr-x.   2 root root    55 Oct 27 10:16 ostree
+drwxr-xr-x.   2 root root    50 Oct 27 10:15 polkit-1
+drwxr-xr-x.   2 root root    75 Oct 27 10:15 modprobe.d
+drwxr-xr-x.   3 root root    19 Oct 27 10:15 fontconfig
+drwxr-xr-x.   2 root root    33 Oct 27 10:15 environment.d
+drwxr-xr-x.   4 root root   236 Oct 27 10:15 dracut
+drwxr-xr-x.   6 root root    76 Oct 27 10:14 kbd
+drwxr-xr-x.   3 root root    21 Oct 27 10:13 grub
+drwxr-xr-x.   4 root root    76 Oct 27 10:12 debug
+drwxr-xr-x.   3 root root    24 Oct 27 10:12 swidtag
+drwxr-xr-x.   4 root root    39 Oct 27 10:12 mozilla
 -rw-r--r--.   1 root root   592 Apr  6  2022 os-release
 drwxr-xr-x.   6 root root    77 Mar 22  2022 NetworkManager
 drwxr-xr-x.   2 root root     6 Feb  8  2022 binfmt.d
 drwxr-xr-x.   3 root root    23 Feb  8  2022 kernel
-drwxr-xr-x.   3 root root    27 Sep 10  2021 python3.6
-drwxr-xr-x. 258 root root  8192 Aug 25  2021 .build-id
+drwxr-xr-x.   3 root root    27 Jan 15  2022 python3.6
 dr-xr-xr-x.   2 root root     6 Jun 21  2021 games
 dr-xr-xr-x.   2 root root     6 Jun 21  2021 sse2
 drwxr-xr-x.   2 root root     6 Jun 21  2021 sysimage
-[root@localhost lib]# cd /usr/include
-[root@localhost include]# ls -lat 4
-ls: cannot access '4': No such file or directory
-[root@localhost include]# ls -lat
-total 12
-drwxr-xr-x.  3 root root 4096 Oct 21 22:02 .
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 udxtypes.h -> /opt/ibm/db2/V10.5/incl    ude/udxtypes.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 udxtfunc.h -> /opt/ibm/db2/V10.5/incl    ude/udxtfunc.h
-lrwxrwxrwx.  1 root root   39 Oct 21 22:02 udxsupport.h -> /opt/ibm/db2/V10.5/in    clude/udxsupport.h
-lrwxrwxrwx.  1 root root   35 Oct 21 22:02 udxinc.h -> /opt/ibm/db2/V10.5/includ    e/udxinc.h
-lrwxrwxrwx.  1 root root   39 Oct 21 22:02 udxhelpers.h -> /opt/ibm/db2/V10.5/in    clude/udxhelpers.h
-lrwxrwxrwx.  1 root root   36 Oct 21 22:02 udxfunc.h -> /opt/ibm/db2/V10.5/inclu    de/udxfunc.h
-lrwxrwxrwx.  1 root root   38 Oct 21 22:02 udxbasev2.h -> /opt/ibm/db2/V10.5/inc    lude/udxbasev2.h
-lrwxrwxrwx.  1 root root   38 Oct 21 22:02 udxbasemc.h -> /opt/ibm/db2/V10.5/inc    lude/udxbasemc.h
-lrwxrwxrwx.  1 root root   34 Oct 21 22:02 sqlxa.h -> /opt/ibm/db2/V10.5/include    /sqlxa.h
-lrwxrwxrwx.  1 root root   34 Oct 21 22:02 sqluv.h -> /opt/ibm/db2/V10.5/include    /sqluv.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sqluvend.h -> /opt/ibm/db2/V10.5/incl    ude/sqluvend.h
-lrwxrwxrwx.  1 root root   36 Oct 21 22:02 sqlutil.h -> /opt/ibm/db2/V10.5/inclu    de/sqlutil.h
-lrwxrwxrwx.  1 root root   35 Oct 21 22:02 sqludf.h -> /opt/ibm/db2/V10.5/includ    e/sqludf.h
-lrwxrwxrwx.  1 root root   38 Oct 21 22:02 sqlucompr.h -> /opt/ibm/db2/V10.5/inc    lude/sqlucompr.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sqlsystm.h -> /opt/ibm/db2/V10.5/incl    ude/sqlsystm.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sqlstate.h -> /opt/ibm/db2/V10.5/incl    ude/sqlstate.h
-lrwxrwxrwx.  1 root root   42 Oct 21 22:02 sqlqg_wrapper.h -> /opt/ibm/db2/V10.5    /include/sqlqg_wrapper.h
-lrwxrwxrwx.  1 root root   40 Oct 21 22:02 sqlqg_utils.h -> /opt/ibm/db2/V10.5/i    nclude/sqlqg_utils.h
-lrwxrwxrwx.  1 root root   39 Oct 21 22:02 sqlqg_user.h -> /opt/ibm/db2/V10.5/in    clude/sqlqg_user.h
-lrwxrwxrwx.  1 root root   51 Oct 21 22:02 sqlqg_unfenced_wrapper.h -> /opt/ibm/    db2/V10.5/include/sqlqg_unfenced_wrapper.h
-lrwxrwxrwx.  1 root root   48 Oct 21 22:02 sqlqg_unfenced_user.h -> /opt/ibm/db2    /V10.5/include/sqlqg_unfenced_user.h
-lrwxrwxrwx.  1 root root   50 Oct 21 22:02 sqlqg_unfenced_server.h -> /opt/ibm/d    b2/V10.5/include/sqlqg_unfenced_server.h
-lrwxrwxrwx.  1 root root   52 Oct 21 22:02 sqlqg_unfenced_nickname.h -> /opt/ibm    /db2/V10.5/include/sqlqg_unfenced_nickname.h
-lrwxrwxrwx.  1 root root   59 Oct 21 22:02 sqlqg_unfenced_generic_wrapper.h -> /    opt/ibm/db2/V10.5/include/sqlqg_unfenced_generic_wrapper.h
-lrwxrwxrwx.  1 root root   56 Oct 21 22:02 sqlqg_unfenced_generic_user.h -> /opt    /ibm/db2/V10.5/include/sqlqg_unfenced_generic_user.h
-lrwxrwxrwx.  1 root root   58 Oct 21 22:02 sqlqg_unfenced_generic_server.h -> /o    pt/ibm/db2/V10.5/include/sqlqg_unfenced_generic_server.h
-lrwxrwxrwx.  1 root root   60 Oct 21 22:02 sqlqg_unfenced_generic_nickname.h ->     /opt/ibm/db2/V10.5/include/sqlqg_unfenced_generic_nickname.h
-lrwxrwxrwx.  1 root root   41 Oct 21 22:02 sqlqg_server.h -> /opt/ibm/db2/V10.5/    include/sqlqg_server.h
-lrwxrwxrwx.  1 root root   57 Oct 21 22:02 sqlqg_runtime_data_operation.h -> /op    t/ibm/db2/V10.5/include/sqlqg_runtime_data_operation.h
-lrwxrwxrwx.  1 root root   42 Oct 21 22:02 sqlqg_request.h -> /opt/ibm/db2/V10.5    /include/sqlqg_request.h
-lrwxrwxrwx.  1 root root   44 Oct 21 22:02 sqlqg_operation.h -> /opt/ibm/db2/V10    .5/include/sqlqg_operation.h
-lrwxrwxrwx.  1 root root   43 Oct 21 22:02 sqlqg_nickname.h -> /opt/ibm/db2/V10.    5/include/sqlqg_nickname.h
-lrwxrwxrwx.  1 root root   39 Oct 21 22:02 sqlqg_misc.h -> /opt/ibm/db2/V10.5/in    clude/sqlqg_misc.h
-lrwxrwxrwx.  1 root root   49 Oct 21 22:02 sqlqg_fenced_wrapper.h -> /opt/ibm/db    2/V10.5/include/sqlqg_fenced_wrapper.h
-lrwxrwxrwx.  1 root root   46 Oct 21 22:02 sqlqg_fenced_user.h -> /opt/ibm/db2/V    10.5/include/sqlqg_fenced_user.h
-lrwxrwxrwx.  1 root root   48 Oct 21 22:02 sqlqg_fenced_server.h -> /opt/ibm/db2    /V10.5/include/sqlqg_fenced_server.h
-lrwxrwxrwx.  1 root root   50 Oct 21 22:02 sqlqg_fenced_nickname.h -> /opt/ibm/d    b2/V10.5/include/sqlqg_fenced_nickname.h
-lrwxrwxrwx.  1 root root   57 Oct 21 22:02 sqlqg_fenced_generic_wrapper.h -> /op    t/ibm/db2/V10.5/include/sqlqg_fenced_generic_wrapper.h
-lrwxrwxrwx.  1 root root   54 Oct 21 22:02 sqlqg_fenced_generic_user.h -> /opt/i    bm/db2/V10.5/include/sqlqg_fenced_generic_user.h
-lrwxrwxrwx.  1 root root   56 Oct 21 22:02 sqlqg_fenced_generic_server.h -> /opt    /ibm/db2/V10.5/include/sqlqg_fenced_generic_server.h
-lrwxrwxrwx.  1 root root   58 Oct 21 22:02 sqlqg_fenced_generic_nickname.h -> /o    pt/ibm/db2/V10.5/include/sqlqg_fenced_generic_nickname.h
-lrwxrwxrwx.  1 root root   45 Oct 21 22:02 sqlqg_connection.h -> /opt/ibm/db2/V1    0.5/include/sqlqg_connection.h
-lrwxrwxrwx.  1 root root   42 Oct 21 22:02 sqlqg_catalog.h -> /opt/ibm/db2/V10.5    /include/sqlqg_catalog.h
-lrwxrwxrwx.  1 root root   40 Oct 21 22:02 sqlqg_array.h -> /opt/ibm/db2/V10.5/i    nclude/sqlqg_array.h
-lrwxrwxrwx.  1 root root   35 Oct 21 22:02 sqlmon.h -> /opt/ibm/db2/V10.5/includ    e/sqlmon.h
-lrwxrwxrwx.  1 root root   35 Oct 21 22:02 sqlmed.h -> /opt/ibm/db2/V10.5/includ    e/sqlmed.h
-lrwxrwxrwx.  1 root root   36 Oct 21 22:02 sqljacb.h -> /opt/ibm/db2/V10.5/inclu    de/sqljacb.h
-lrwxrwxrwx.  1 root root   32 Oct 21 22:02 sql.h -> /opt/ibm/db2/V10.5/include/s    ql.h
-lrwxrwxrwx.  1 root root   35 Oct 21 22:02 sqlext.h -> /opt/ibm/db2/V10.5/includ    e/sqlext.h
-lrwxrwxrwx.  1 root root   35 Oct 21 22:02 sqlenv.h -> /opt/ibm/db2/V10.5/includ    e/sqlenv.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sqle932b.h -> /opt/ibm/db2/V10.5/incl    ude/sqle932b.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sqle932a.h -> /opt/ibm/db2/V10.5/incl    ude/sqle932a.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sqle850b.h -> /opt/ibm/db2/V10.5/incl    ude/sqle850b.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sqle850a.h -> /opt/ibm/db2/V10.5/incl    ude/sqle850a.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sqle819b.h -> /opt/ibm/db2/V10.5/incl    ude/sqle819b.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sqle819a.h -> /opt/ibm/db2/V10.5/incl    ude/sqle819a.h
-lrwxrwxrwx.  1 root root   34 Oct 21 22:02 sqlda.h -> /opt/ibm/db2/V10.5/include    /sqlda.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sqlcodes.h -> /opt/ibm/db2/V10.5/incl    ude/sqlcodes.h
-lrwxrwxrwx.  1 root root   35 Oct 21 22:02 sqlcli.h -> /opt/ibm/db2/V10.5/includ    e/sqlcli.h
-lrwxrwxrwx.  1 root root   36 Oct 21 22:02 sqlcli1.h -> /opt/ibm/db2/V10.5/inclu    de/sqlcli1.h
-lrwxrwxrwx.  1 root root   34 Oct 21 22:02 sqlca.h -> /opt/ibm/db2/V10.5/include    /sqlca.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sqlaprep.h -> /opt/ibm/db2/V10.5/incl    ude/sqlaprep.h
-lrwxrwxrwx.  1 root root   36 Oct 21 22:02 sqladef.h -> /opt/ibm/db2/V10.5/inclu    de/sqladef.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sql1252b.h -> /opt/ibm/db2/V10.5/incl    ude/sql1252b.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 sql1252a.h -> /opt/ibm/db2/V10.5/incl    ude/sql1252a.h
-lrwxrwxrwx.  1 root root   38 Oct 21 22:02 gssapiDB2.h -> /opt/ibm/db2/V10.5/inc    lude/gssapiDB2.h
-lrwxrwxrwx.  1 root root   39 Oct 21 22:02 fsumplugin.h -> /opt/ibm/db2/V10.5/in    clude/fsumplugin.h
-lrwxrwxrwx.  1 root root   41 Oct 21 22:02 db2VendorApi.h -> /opt/ibm/db2/V10.5/    include/db2VendorApi.h
-lrwxrwxrwx.  1 root root   36 Oct 21 22:02 db2udbg.h -> /opt/ibm/db2/V10.5/inclu    de/db2udbg.h
-lrwxrwxrwx.  1 root root   41 Oct 21 22:02 db2secPlugin.h -> /opt/ibm/db2/V10.5/    include/db2secPlugin.h
-lrwxrwxrwx.  1 root root   36 Oct 21 22:02 db2psmd.h -> /opt/ibm/db2/V10.5/inclu    de/db2psmd.h
-lrwxrwxrwx.  1 root root   35 Oct 21 22:02 db2gse.h -> /opt/ibm/db2/V10.5/includ    e/db2gse.h
-lrwxrwxrwx.  1 root root   40 Oct 21 22:02 db2commexit.h -> /opt/ibm/db2/V10.5/i    nclude/db2commexit.h
-lrwxrwxrwx.  1 root root   34 Oct 21 22:02 db2ci.h -> /opt/ibm/db2/V10.5/include    /db2ci.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 db2AuCfg.h -> /opt/ibm/db2/V10.5/incl    ude/db2AuCfg.h
-lrwxrwxrwx.  1 root root   37 Oct 21 22:02 db2ApiDf.h -> /opt/ibm/db2/V10.5/incl    ude/db2ApiDf.h
-lrwxrwxrwx.  1 root root   38 Oct 21 22:02 db2ACSApi.h -> /opt/ibm/db2/V10.5/inc    lude/db2ACSApi.h
-lrwxrwxrwx.  1 root root   32 Oct 21 22:02 asn.h -> /opt/ibm/db2/V10.5/include/a    sn.h
-drwxr-xr-x.  2 root root 4096 Oct 21 20:58 python3.6m
-drwxr-xr-x. 13 root root  158 Oct 21 20:32 ..
-[root@localhost include]# /opt/ibm/db2/V10.5/instance/db2icrt  -s ese -a SERVER -u db2fenc1 db2inst1
+drwxr-xr-x. 258 root root  8192 Nov  8  2018 .build-id
+[root@localhost universal]# cd /usr/lib ls-lat
+bash: cd: too many arguments
+[root@localhost universal]# cd /usr/lib
+[root@localhost lib]# ls -lat
+total 68
+dr-xr-xr-x.  38 root root  4096 Oct 28 10:34 .
+lrwxrwxrwx.   1 root root    39 Oct 28 10:34 libdb2e.so.1.0 -> /opt/ibm/db2/V10.5/lib32/libdb2e.so.1.0
+lrwxrwxrwx.   1 root root    37 Oct 28 10:34 libdb2e.so.1 -> /opt/ibm/db2/V10.5/lib32/libdb2e.so.1
+lrwxrwxrwx.   1 root root    35 Oct 28 10:34 libdb2e.so -> /opt/ibm/db2/V10.5/lib32/libdb2e.so
+lrwxrwxrwx.   1 root root    38 Oct 28 10:34 libdb2.so.1.0 -> /opt/ibm/db2/V10.5/lib32/libdb2.so.1.0
+lrwxrwxrwx.   1 root root    36 Oct 28 10:34 libdb2.so.1 -> /opt/ibm/db2/V10.5/lib32/libdb2.so.1
+lrwxrwxrwx.   1 root root    34 Oct 28 10:34 libdb2.so -> /opt/ibm/db2/V10.5/lib32/libdb2.so
+drwxr-xr-x.  39 root root  4096 Oct 27 10:28 locale
+drwxr-xr-x.  91 root root 16384 Oct 27 10:28 firmware
+drwxr-xr-x.   4 root root  4096 Oct 27 10:26 udev
+drwxr-xr-x.   2 root root  4096 Oct 27 10:26 tmpfiles.d
+drwxr-xr-x.  16 root root  4096 Oct 27 10:25 tuned
+drwxr-xr-x.   8 root root    97 Oct 27 10:25 firewalld
+drwxr-xr-x.  13 root root   158 Oct 27 10:25 ..
+drwxr-xr-x.   2 root root    74 Oct 27 10:25 realmd
+drwxr-xr-x.   2 root root   107 Oct 27 10:25 modules-load.d
+drwxr-xr-x.   9 root root   109 Oct 27 10:25 cups
+drwxr-xr-x.   2 root root   101 Oct 27 10:24 sysusers.d
+drwxr-xr-x.   2 root root   208 Oct 27 10:22 sysctl.d
+drwxr-xr-x.   2 root root    79 Oct 27 10:22 kdump
+drwxr-xr-x.  16 root root  4096 Oct 27 10:22 systemd
+drwxr-xr-x.   2 root root    26 Oct 27 10:22 mdadm
+drwxr-xr-x.   3 root root    18 Oct 27 10:21 alsa
+drwxr-xr-x.   5 root root  4096 Oct 27 10:21 rpm
+drwxr-xr-x.   4 root root    72 Oct 27 10:16 modules
+drwxr-xr-x.   2 root root    55 Oct 27 10:16 ostree
+drwxr-xr-x.   2 root root    50 Oct 27 10:15 polkit-1
+drwxr-xr-x.   2 root root    75 Oct 27 10:15 modprobe.d
+drwxr-xr-x.   3 root root    19 Oct 27 10:15 fontconfig
+drwxr-xr-x.   2 root root    33 Oct 27 10:15 environment.d
+drwxr-xr-x.   4 root root   236 Oct 27 10:15 dracut
+drwxr-xr-x.   6 root root    76 Oct 27 10:14 kbd
+drwxr-xr-x.   3 root root    21 Oct 27 10:13 grub
+drwxr-xr-x.   4 root root    76 Oct 27 10:12 debug
+drwxr-xr-x.   3 root root    24 Oct 27 10:12 swidtag
+drwxr-xr-x.   4 root root    39 Oct 27 10:12 mozilla
+-rw-r--r--.   1 root root   592 Apr  6  2022 os-release
+drwxr-xr-x.   6 root root    77 Mar 22  2022 NetworkManager
+drwxr-xr-x.   2 root root     6 Feb  8  2022 binfmt.d
+drwxr-xr-x.   3 root root    23 Feb  8  2022 kernel
+drwxr-xr-x.   3 root root    27 Jan 15  2022 python3.6
+dr-xr-xr-x.   2 root root     6 Jun 21  2021 games
+dr-xr-xr-x.   2 root root     6 Jun 21  2021 sse2
+drwxr-xr-x.   2 root root     6 Jun 21  2021 sysimage
+drwxr-xr-x. 258 root root  8192 Nov  8  2018 .build-id
+[root@localhost lib]# /opt/ibm/db2/V10.5/instance/db2icrt  -s ese -a SERVER -u db2fenc1 db2inst1
 DBI1446I  The db2icrt command is running.
 
 
@@ -469,85 +460,28 @@ Task #4 end
 
 The execution completed successfully.
 
-For more information see the DB2 installation log at "/tmp/db2icrt.log.66435".
+For more information see the DB2 installation log at "/tmp/db2icrt.log.39411".
 DBI1070I  Program db2icrt completed successfully.
 
 
-[root@localhost include]# cat /tmp/db2icrt.log.66435
-
-DB2 Setup log file started at:  Fri Oct 21 10:03:28 PM 2022 CST
-============================================================
-
-Operating system information: Linux 4.18.0-372.9.1.el8.x86_64.#1 SMP Fri Apr 15 22:12:19 EDT 2022 x86_64
-WARNING: Notification SMTP server has not been specified. Notifications cannot
-be sent to contacts in your contact list until this is specified. For more
-information see the DB2 administration documentation.
-
-
-
-New instances:
-    Instance name:                              db2inst1
-        Authentication:                         SERVER
-        Instance user information:
-            User name:                          db2inst1
-        Fenced user information:
-            User name:                          db2fenc1
-
-
-
-
-
-Setting default global profile registry variables :.......Success
-The maximum number of logical nodes was not specified for the instance
-"db2inst1". Default parameters will be used.
-
-Initializing instance list :.......Success
-The instance "db2inst1" has been created successfully.
-
-The value "AUTHENTICATION=SERVER" was set in the DBM CFG file for the
-"db2inst1" instance.
-
-Configuring DB2 instances :.......Success
-Updating global profile registry :.......Success
-
-Post-installation instructions
--------------------------------
-
-Required steps:
-DB2 Text Search has not been configured for the instance "db2inst1".To automatically configure DB2 text search services, run the db2iupdt command (or the db2nrupdt command for non-root installations) specifying the -j "TEXT_SEARCH" option.Manual configuration steps can be found in the DB2 Text Search documentation "http://publib.boulder.ibm.com/infocenter/db2luw/v10r5/topic/com.ibm.db2.luw.admin.ts.doc/doc/t0052968.html".
-
-Start using the DB2 product using a valid user ID such as the DB2 instance owner's ID "db2inst1".
-
-Optional steps:
-To validate your installation files, instance, and database functionality, run the Validation Tool, /opt/ibm/db2/V10.5/bin/db2val. For more information, see "db2val" in the DB2 Information Center.
-
-Open First Steps by running "db2fs" using a valid user ID such as the DB2 instance owner's ID. You will need to have DISPLAY set and a supported web browser in the path of this user ID.
-
-Verify that you have access to the DB2 Information Center based on the choices you made during this installation. If you performed a typical or a compact installation, verify that you can access the IBM Web site using the internet. If you performed a custom installation, verify that you can access the DB2 Information Center location specified during the installation.
-
-Ensure that you have the correct license entitlements for DB2 products and features installed on this machine. Each DB2 product or feature comes with a license certificate file (also referred to as a license key) that is distributed on an Activation CD, which also includes instructions for applying the license file. If you purchased a base DB2 product, as well as, separately priced features, you might need to install more than one license certificate. The Activation CD for your product or feature can be downloaded from Passport Advantage if it is not part of the physical media pack you received from IBM. For more information about licensing, search the Information Center (http://publib.boulder.ibm.com/infocenter/db2luw/v10r5/index.jsp) using terms such as "license compliance", "licensing" or "db2licm".
-
-To use your DB2 database product, you must have a valid license. For information about obtaining and applying DB2 license files, see http://pic.dhe.ibm.com/infocenter/db2luw/v10r5/topic/com.ibm.db2.luw.qb.server.doc/doc/c0061199.html.
-
-
-DB2 Setup log file finished at:  Fri Oct 21 10:04:30 PM 2022 CST
-============================================================
-
-[root@localhost include]# su db2inst1
-[db2inst1@localhost include]$ db2start
-SQL8007W  There are "89" day(s) left in the evaluation period for the product
+[root@localhost lib]# vi /tmp/db2icrt.log.39411
+[root@localhost lib]# su db2inst1
+[db2inst1@localhost lib]$ db2start
+SQL8007W  There are "90" day(s) left in the evaluation period for the product
 "DB2 Advanced Enterprise Server Edition". For evaluation license terms and
 conditions, refer to the License Agreement document located in the license
 directory in the installation path of this product. If you have licensed this
 product, ensure the license key is properly registered. You can register the
 license by using the db2licm command line utility. The license key can be
 obtained from your licensed product CD.
-10/21/2022 22:08:11     0   0   SQL1063N  DB2START processing was successful.
+10/28/2022 10:38:28     0   0   SQL1063N  DB2START processing was successful.
 SQL1063N  DB2START processing was successful.
-[db2inst1@localhost include]$ ps -ef |grep db2sysc
-db2inst1   77260   77258  2 22:08 pts/0    00:00:00 db2sysc 0
-db2inst1   77287   77122  0 22:08 pts/0    00:00:00 grep --color=auto db2sysc
-[db2inst1@localhost include]$ db2sampl
+[db2inst1@localhost lib]$ ps -ef |grep db2sysc
+db2inst1   50305   50303  3 10:38 pts/0    00:00:00 db2sysc 0
+db2inst1   50334   50163  0 10:38 pts/0    00:00:00 grep --color=auto db2sysc
+[db2inst1@localhost lib]$ db2samp1
+bash: db2samp1: command not found...
+[db2inst1@localhost lib]$ db2sampl
 
   Creating database "SAMPLE"...
   Connecting to database "SAMPLE"...
@@ -556,7 +490,7 @@ db2inst1   77287   77122  0 22:08 pts/0    00:00:00 grep --color=auto db2sysc
 
   'db2sampl' processing complete.
 
-[db2inst1@localhost include]$ db2 connect to sample
+[db2inst1@localhost lib]$ db2 connect to sample
 
    Database Connection Information
 
@@ -564,7 +498,7 @@ db2inst1   77287   77122  0 22:08 pts/0    00:00:00 grep --color=auto db2sysc
  SQL authorization ID   = DB2INST1
  Local database alias   = SAMPLE
 
-[db2inst1@localhost include]$ db2 "select * from org"
+[db2inst1@localhost lib]$ db2 "select *from org"
 
 DEPTNUMB DEPTNAME       MANAGER DIVISION   LOCATION
 -------- -------------- ------- ---------- -------------
@@ -579,382 +513,130 @@ DEPTNUMB DEPTNAME       MANAGER DIVISION   LOCATION
 
   8 record(s) selected.
 
-[db2inst1@localhost include]$ db2 terminate
+[db2inst1@localhost lib]$ db2 terminate
 DB20000I  The TERMINATE command completed successfully.
-[db2inst1@localhost include]$ db2 drop db sample
+[db2inst1@localhost lib]$ db2 drop db sample
 DB20000I  The DROP DATABASE command completed successfully.
-[db2inst1@localhost include]$
---------------------------------------------------------------------------------------------------------------------------------------
-
-[root@localhost Install]# cd 1.OnDemand_for_Multiplatforms_server\(all_platforms\)/
-[root@localhost 1.OnDemand_for_Multiplatforms_server(all_platforms)]# ls
-aix  license  linux  linux390  readme.txt  sun  windows
-[root@localhost 1.OnDemand_for_Multiplatforms_server(all_platforms)]# cd linux
-[root@localhost linux]# ls
-gskcrypt32-8.0.14.44.linux.x86.rpm     gskssl64-8.0.14.44.linux.x86_64.rpm
-gskcrypt64-8.0.14.44.linux.x86_64.rpm  odlinux.bin
-gskssl32-8.0.14.44.linux.x86.rpm       readme.txt
-[root@localhost linux]# rpm -Uv gskcrypt64-8.0.14.44.linux.x86_64.rpm
-Verifying packages...
-Preparing packages...
-gskcrypt64-8.0-14.44.x86_64
-[root@localhost linux]# rpm -Uv gskssl64-8.0.14.44.linux.x86_64.rpm
-Verifying packages...
-Preparing packages...
-gskssl64-8.0-14.44.x86_64
-[root@localhost linux]# yum install ksh
-Last metadata expiration check: 1:09:59 ago on Fri 21 Oct 2022 09:04:21 PM CST.
-Dependencies resolved.
-====================================================================================
- Package      Architecture    Version                      Repository          Size
-====================================================================================
-Installing:
- ksh          x86_64          20120801-254.el8             AppStream          926 k
-
-Transaction Summary
-====================================================================================
-Install  1 Package
-
-Total download size: 926 k
-Installed size: 3.2 M
-Is this ok [y/N]: y
-Downloading Packages:
-ksh-20120801-254.el8.x86_64.rpm                     256 kB/s | 926 kB     00:03
-------------------------------------------------------------------------------------
-Total                                               255 kB/s | 926 kB     00:03
-Running transaction check
-Transaction check succeeded.
-Running transaction test
-Transaction test succeeded.
-Running transaction
-  Preparing        :                                                            1/1
-  Installing       : ksh-20120801-254.el8.x86_64                                1/1
-  Running scriptlet: ksh-20120801-254.el8.x86_64                                1/1
-  Verifying        : ksh-20120801-254.el8.x86_64                                1/1
-
-Installed:
-  ksh-20120801-254.el8.x86_64
-
-Complete!
-[root@localhost linux]# ls
-gskcrypt32-8.0.14.44.linux.x86.rpm     gskssl64-8.0.14.44.linux.x86_64.rpm
-gskcrypt64-8.0.14.44.linux.x86_64.rpm  odlinux.bin
-gskssl32-8.0.14.44.linux.x86.rpm       readme.txt
-[root@localhost linux]# ./odlinux.bin -i console
-Preparing to install...
-Extracting the JRE from the installer archive...
-Unpacking the JRE...
-Extracting the installation resources from the installer archive...
-Configuring the installer for this system's environment...
-
-Launching installer...
-
-===============================================================================
-Choose Locale...
-----------------
-
-    1- Deutsch
-  ->2- English
-    3- Español
-    4- Français
-    5- Italiano
-    6- Português  (Brasil)
-
-CHOOSE LOCALE BY NUMBER: 2
-===============================================================================
-IBM OnDemand V9.5                                (created with InstallAnywhere)
--------------------------------------------------------------------------------
-
-Preparing CONSOLE Mode Installation...
-
-
-
-
-===============================================================================
-Introduction
-------------
-
-InstallAnywhere will guide you through the installation of IBM OnDemand V9.5
-version 9.5.0.0.
-
-It is strongly recommended that you quit all programs before continuing with
-this installation.
-
-Respond to each prompt to proceed to the next step in the installation.  If you
-want to change something on a previous step, type 'back'.
-
-You may cancel this installation at any time by typing 'quit'.
-
-PRESS <ENTER> TO CONTINUE:
-
-
-
-===============================================================================
-
-
-
-
-    International Program License Agreement
-
-    Part 1 - General Terms
-
-    BY DOWNLOADING, INSTALLING, COPYING, ACCESSING, CLICKING ON AN
-    "ACCEPT" BUTTON, OR OTHERWISE USING THE PROGRAM, LICENSEE AGREES TO
-    THE TERMS OF THIS AGREEMENT. IF YOU ARE ACCEPTING THESE TERMS ON
-    BEHALF OF LICENSEE, YOU REPRESENT AND WARRANT THAT YOU HAVE FULL
-    AUTHORITY TO BIND LICENSEE TO THESE TERMS. IF YOU DO NOT AGREE TO
-    THESE TERMS,
-
-    * DO NOT DOWNLOAD, INSTALL, COPY, ACCESS, CLICK ON AN "ACCEPT" BUTTON,
-    OR USE THE PROGRAM; AND
-
-    * PROMPTLY RETURN THE UNUSED MEDIA, DOCUMENTATION, AND PROOF OF
-    ENTITLEMENT TO THE PARTY FROM WHOM IT WAS OBTAINED FOR A REFUND OF THE
-    AMOUNT PAID. IF THE PROGRAM WAS DOWNLOADED, DESTROY ALL COPIES OF THE
-    PROGRAM.
-
-
-Press Enter to continue viewing the license agreement, or enter "1" to
-   accept the agreement, "2" to decline it, "3" to print it, or "99" to go back
-   to the previous screen.: 1
-
-
-
-
-===============================================================================
-Choose Install Folder
----------------------
-
-Where would you like to install?
-
-  Default Install Folder: /opt/ibm/ondemand/V9.5
-
-ENTER AN ABSOLUTE PATH, OR PRESS <ENTER> TO ACCEPT THE DEFAULT
-      :
-
-
-
-===============================================================================
-Choose License Type
--------------------
-
-Authorized User (UVU)
-Usage-based license for frequent IBM Content Manager OnDemand V9.5 users (121
-times or more in 12 months).  The Content Manager OnDemand Server will register
-and activate a usage collection service for IBM Content Manager OnDemand V9.5.
-
-Processor Value Unit, Production (PVU)
-PVU-based production license.  IBM Content Manager OnDemand V9.5 will not
-collect any server usage information.
-
-Processor Value Unit, Non-Production (Non-Prod PVU)
-PVU-based non-production license. IBM Content Manager OnDemand V9.5 will not
-collect any server usage information.
-
-Eligible Participant (Eligible Participant RVU)
-Eligible Participant RVU-based license.  The IBM Content Manager OnDemand
-server will register and activate a usage collection service for IBM Content
-Manager OnDemand V9.5.
-
-    1- Authorized User (UVU)
-  ->2- Processor Value Unit, Production (PVU)
-    3- Processor Value Unit, Non-Production (Non-Prod PVU)
-    4- Eligible Participant (Eligible Participant RVU)
-
-ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:: 2
-
-
-
-
-===============================================================================
-Pre-Installation Summary
-------------------------
-
-Please Review the Following Before Continuing:
-
-Product Name:
-    IBM OnDemand V9.5
-
-Install Folder:
-    /opt/ibm/ondemand/V9.5
-
-Processor Value Unit, Production (PVU)
-    PVU-based production license.  IBM Content Manager OnDemand V9.5 will not collect any server usage information.
-
-Disk Space Information (for Installation Target):
-    Required:  580,865,688 Bytes
-    Available: 30,097,903,616 Bytes
-
-PRESS <ENTER> TO CONTINUE:
-
-
-
-===============================================================================
-Ready To Install
-----------------
-
-InstallAnywhere is now ready to install IBM OnDemand V9.5 onto your system at
-the following location:
-
-   /opt/ibm/ondemand/V9.5
-
-PRESS <ENTER> TO INSTALL:
-
-
-
-===============================================================================
-Installing...
--------------
-
- [==================|==================|==================|==================]
- [------------------|------------------|------------------|------------------]
-
-
-
-===============================================================================
-IBM OnDemand V9.5
------------------
-
-The product readme file can be found in /opt/ibm/ondemand/V9.5.
-
-Do you want to display the product readme file?
-
-  ->1- No
-    2- Yes
-
-ENTER THE NUMBER OF THE DESIRED CHOICE, OR PRESS <ENTER> TO ACCEPT THE
-   DEFAULT: 1
-
-
-
-===============================================================================
-Installation Complete
----------------------
-
-Congratulations. IBM OnDemand V9.5 has been successfully installed to:
-
-   /opt/ibm/ondemand/V9.5
-
-PRESS <ENTER> TO EXIT THE INSTALLER:
-[root@localhost linux]# su dasinst1
-[dasinst1@localhost linux]$ cd ~
-[dasinst1@localhost ~]$ ls
-[dasinst1@localhost ~]$ ls -la
+[db2inst1@localhost lib]$ exit
+exit
+[root@localhost lib]# su dasinst1
+[dasinst1@localhost lib]$ cd ~
+[dasinst1@localhost ~]$
+[dasinst1@localhost ~]$ ls -lat
 total 12
-drwx------. 2 dasinst1 dasinst1  62 Oct 21 21:53 .
-drwxr-xr-x. 7 root     root      84 Oct 21 21:53 ..
--rw-r--r--. 1 dasinst1 dasinst1  18 Sep 30  2021 .bash_logout
--rw-r--r--. 1 dasinst1 dasinst1 141 Sep 30  2021 .bash_profile
--rw-r--r--. 1 dasinst1 dasinst1 376 Sep 30  2021 .bashrc
+drwxr-xr-x. 8 root     root      93 Oct 27 16:37 ..
+drwx------. 3 dasinst1 db2iadm1  78 Oct 27 16:37 .
+drwxr-xr-x. 4 dasinst1 db2iadm1  39 Oct 27 10:12 .mozilla
+-rw-r--r--. 1 dasinst1 db2iadm1  18 Sep 30  2021 .bash_logout
+-rw-r--r--. 1 dasinst1 db2iadm1 141 Sep 30  2021 .bash_profile
+-rw-r--r--. 1 dasinst1 db2iadm1 376 Sep 30  2021 .bashrc
+[dasinst1@localhost ~]$ vi .bash_profile
+[dasinst1@localhost ~]$ db2start
+bash: db2start: command not found...
+[dasinst1@localhost ~]$ ls -lat
+total 16
+drwx------. 3 dasinst1 db2iadm1  94 Oct 28 11:15 .
+-rw-------. 1 dasinst1 db2iadm1 834 Oct 28 11:15 .viminfo
+drwxr-xr-x. 8 root     root      93 Oct 27 16:37 ..
+drwxr-xr-x. 4 dasinst1 db2iadm1  39 Oct 27 10:12 .mozilla
+-rw-r--r--. 1 dasinst1 db2iadm1  18 Sep 30  2021 .bash_logout
+-rw-r--r--. 1 dasinst1 db2iadm1 141 Sep 30  2021 .bash_profile
+-rw-r--r--. 1 dasinst1 db2iadm1 376 Sep 30  2021 .bashrc
+[dasinst1@localhost ~]$ cp .bash_profile .bash_profile_bk
+[dasinst1@localhost ~]$ ls -lat
+total 20
+-rw-r--r--. 1 dasinst1 db2iadm1 141 Oct 28 11:16 .bash_profile_bk
+drwx------. 3 dasinst1 db2iadm1 118 Oct 28 11:16 .
+-rw-------. 1 dasinst1 db2iadm1 834 Oct 28 11:15 .viminfo
+drwxr-xr-x. 8 root     root      93 Oct 27 16:37 ..
+drwxr-xr-x. 4 dasinst1 db2iadm1  39 Oct 27 10:12 .mozilla
+-rw-r--r--. 1 dasinst1 db2iadm1  18 Sep 30  2021 .bash_logout
+-rw-r--r--. 1 dasinst1 db2iadm1 141 Sep 30  2021 .bash_profile
+-rw-r--r--. 1 dasinst1 db2iadm1 376 Sep 30  2021 .bashrc
+[dasinst1@localhost ~]$ cat .bash_profile
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+[dasinst1@localhost ~]$ vi .bash_profile
+[dasinst1@localhost ~]$ db2start
+bash: db2start: command not found...
+[dasinst1@localhost ~]$ rm .bash_profile
+[dasinst1@localhost ~]$ mv .bash_profile_bk .bash_profile
+[dasinst1@localhost ~]$ ls
+[dasinst1@localhost ~]$ ls -lat
+total 16
+drwx------. 3 dasinst1 db2iadm1   94 Oct 28 11:18 .
+-rw-------. 1 dasinst1 db2iadm1 1202 Oct 28 11:17 .viminfo
+-rw-r--r--. 1 dasinst1 db2iadm1  141 Oct 28 11:16 .bash_profile
+drwxr-xr-x. 8 root     root       93 Oct 27 16:37 ..
+drwxr-xr-x. 4 dasinst1 db2iadm1   39 Oct 27 10:12 .mozilla
+-rw-r--r--. 1 dasinst1 db2iadm1   18 Sep 30  2021 .bash_logout
+-rw-r--r--. 1 dasinst1 db2iadm1  376 Sep 30  2021 .bashrc
+[dasinst1@localhost ~]$ cd /home
+[dasinst1@localhost home]$ ls
+dasacc  dasinst1  db2fenc1  db2inst1  m  wasinst1
+[dasinst1@localhost home]$ ce dasinst1
+bash: ce: command not found...
+[dasinst1@localhost home]$ ls -lat
+total 4
+drwx------.  3 dasinst1 db2iadm1   94 Oct 28 11:18 dasinst1
+drwxr-xr-x.  9 db2inst1 db2iadm1  184 Oct 28 10:41 db2inst1
+drwx------. 15 m        m        4096 Oct 28 10:07 m
+drwx------.  3 db2fenc1 db2fadm1   78 Oct 27 16:37 db2fenc1
+drwxr-xr-x.  8 root     root       93 Oct 27 16:37 .
+drwx------.  3 wasinst1 wasiadm1   78 Oct 27 16:37 wasinst1
+drwx------.  3 dasacc   dasacc     78 Oct 27 16:37 dasacc
+dr-xr-xr-x. 17 root     root      224 Oct 27 10:12 ..
+[dasinst1@localhost home]$ cd dasinst1
+[dasinst1@localhost ~]$ ls
+[dasinst1@localhost ~]$ ls -lat
+total 16
+drwx------. 3 dasinst1 db2iadm1   94 Oct 28 11:18 .
+-rw-------. 1 dasinst1 db2iadm1 1202 Oct 28 11:17 .viminfo
+-rw-r--r--. 1 dasinst1 db2iadm1  141 Oct 28 11:16 .bash_profile
+drwxr-xr-x. 8 root     root       93 Oct 27 16:37 ..
+drwxr-xr-x. 4 dasinst1 db2iadm1   39 Oct 27 10:12 .mozilla
+-rw-r--r--. 1 dasinst1 db2iadm1   18 Sep 30  2021 .bash_logout
+-rw-r--r--. 1 dasinst1 db2iadm1  376 Sep 30  2021 .bashrc
+[dasinst1@localhost ~]$ cd /home/dasinst1/
+[dasinst1@localhost ~]$ ls -lat
+total 16
+drwx------. 3 dasinst1 db2iadm1   94 Oct 28 11:18 .
+-rw-------. 1 dasinst1 db2iadm1 1202 Oct 28 11:17 .viminfo
+-rw-r--r--. 1 dasinst1 db2iadm1  141 Oct 28 11:16 .bash_profile
+drwxr-xr-x. 8 root     root       93 Oct 27 16:37 ..
+drwxr-xr-x. 4 dasinst1 db2iadm1   39 Oct 27 10:12 .mozilla
+-rw-r--r--. 1 dasinst1 db2iadm1   18 Sep 30  2021 .bash_logout
+-rw-r--r--. 1 dasinst1 db2iadm1  376 Sep 30  2021 .bashrc
+[dasinst1@localhost ~]$ cp .bash_profile .bash_profile_bk
 [dasinst1@localhost ~]$ vi .bash_profile
 [dasinst1@localhost ~]$ vi .bash_profile
-[dasinst1@localhost ~]$ db2set db2codepage=1208
-bash: db2set: command not found
-[dasinst1@localhost ~]$ su db2inst1
-Password:
-[dasinst1@localhost ~]$ exit
-exit
-[root@localhost linux]# su db2inst1
-[db2inst1@localhost linux]$ db2set db2codepage=1208
-[db2inst1@localhost linux]$ db2set db2country=88
-[db2inst1@localhost linux]$ db2set db2comm=tcpip
-[db2inst1@localhost linux]$ db2set
-DB2COUNTRY=88
-DB2COMM=TCPIP
-DB2CODEPAGE=1208
-[db2inst1@localhost linux]$
-[db2inst1@localhost linux]$ /etc/services
-bash: /etc/services: Permission denied
-[db2inst1@localhost linux]$ grep –i db2inst1 /etc/services
-grep: db2inst1: No such file or directory
-[db2inst1@localhost linux]$ exit
-exit
-[root@localhost linux]# su dasinst1
-[dasinst1@localhost linux]$ grep –i db2inst1 /etc/services
-grep: db2inst1: No such file or directory
-[dasinst1@localhost linux]$ exit
-exit
-[root@localhost linux]# su db2inst1
-[db2inst1@localhost linux]$ grep -i db2inst1 /etc/services
-DB2_db2inst1    60000/tcp
-DB2_db2inst1_1  60001/tcp
-DB2_db2inst1_2  60002/tcp
-DB2_db2inst1_3  60003/tcp
-DB2_db2inst1_4  60004/tcp
-DB2_db2inst1_END        60005/tcp
-[db2inst1@localhost linux]$ ^C
-[db2inst1@localhost linux]$ db2
-(c) Copyright IBM Corporation 1993,2007
-Command Line Processor for DB2 Client 10.5.11
-
-You can issue database manager commands and SQL statements from the command
-prompt. For example:
-    db2 => connect to sample
-    db2 => bind sample.bnd
-
-For general help, type: ?.
-For command help, type: ? command, where command can be
-the first few keywords of a database manager command. For example:
- ? CATALOG DATABASE for help on the CATALOG DATABASE command
- ? CATALOG          for help on all of the CATALOG commands.
-
-To exit db2 interactive mode, type QUIT at the command prompt. Outside
-interactive mode, all commands must be prefixed with 'db2'.
-To list the current command option settings, type LIST COMMAND OPTIONS.
-
-For more detailed help, refer to the Online Reference Manual.
-
-db2 => update dbm cfg using SVCENAME DB2_db2inst1
-DB20000I  The UPDATE DATABASE MANAGER CONFIGURATION command completed
-successfully.
-db2 => exit
-DB21034E  The command was processed as an SQL statement because it was not a
-valid Command Line Processor command.  During SQL processing it returned:
-SQL1024N  A database connection does not exist.  SQLSTATE=08003
-db2 => ^C[db2inst1@localhost linux]$
-[db2inst1@localhost linux]$ db2 get dbm cfg | grep SVCENAME
- TCP/IP Service name                          (SVCENAME) = DB2_db2inst1
- SSL service name                         (SSL_SVCENAME) =
-[db2inst1@localhost linux]$ cd /opt/ibm/ondemand/V9.5/config
-[db2inst1@localhost config]$ ls
-archive.mac  ars.cfg   ars.ini     arspdsys.bst  arsxform.xml    unzip
-ars.cache    ars.dbfs  arsodf.xml  arspdusr.bst  trace.settings  zip
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[dasinst1@localhost ~]$ source .bash_profile
+[dasinst1@localhost ~]$ db2start
+10/28/2022 11:22:47     0   0   SQL1026N  The database manager is already active.
+SQL1026N  The database manager is already active.
+[dasinst1@localhost ~]$ ps -ef|grep db2sy^C
+[dasinst1@localhost ~]$ ps -ef |grep db2sysc
+db2inst1   50305   50303  2 10:54 pts/0    00:00:50 db2sysc 0
+dasinst1   51745   50571  0 11:26 pts/0    00:00:00 grep --color=auto db2sysc
+[dasinst1@localhost ~]$ db2stop
+2022-10-28 11:27:01     0   0   SQL1064N  DB2STOP processing was successful.
+SQL1064N  DB2STOP processing was successful.
+[dasinst1@localhost ~]$ ps -ef |grep db2sysc
+dasinst1   51758   50571  0 11:27 pts/0    00:00:00 grep --color=auto db2sysc
+[dasinst1@localhost ~]$ db2start
+SQL8007W  There are "90" day(s) left in the evaluation period for the product
+"DB2 Advanced Enterprise Server Edition". For evaluation license terms and
+conditions, refer to the License Agreement document located in the license
+directory in the installation path of this product. If you have licensed this
+product, ensure the license key is properly registered. You can register the
+license by using the db2licm command line utility. The license key can be
+obtained from your licensed product CD.
+10/28/2022 11:27:13     0   0   SQL1063N  DB2START processing was successful.
+SQL1063N  DB2START processing was successful.
+[dasinst1@localhost ~]$
